@@ -2,8 +2,8 @@
 
 Welcome to **DocAppoint**, an advanced Doctor Appointment Booking System built with Next.js, React, Tailwind CSS, Node.js, Express, and MongoDB.
 
-- **Live Web Application URL**: [https://docappoint-client.vercel.app]
-- **Server API URL**: [https://docappoint-server.onrender.com]
+- **Live Web Application URL**: 
+- **Server API URL**: 
 
 ---
 
