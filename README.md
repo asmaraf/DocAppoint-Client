@@ -1,7 +1,7 @@
 # DocAppoint — Doctor Appointment Booking System
 
-**Live Site URL:** [https://docappoint-client.vercel.app](https://docappoint-client.vercel.app)  
-**Server API URL:** [https://docappoint-server.onrender.com](https://docappoint-server.onrender.com)
+**Live Site URL:** 
+**Server API URL:** 
 
 <<<<<<< HEAD
 - **Live Web Application URL**: 
