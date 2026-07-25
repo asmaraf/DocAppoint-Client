@@ -1,12 +1,12 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { Calendar, User, Edit3, Trash2, Clock, Phone, Stethoscope, Mail, ShieldCheck, Plus, CheckCircle, RefreshCw } from 'lucide-react';
 import UpdateBookingModal from '@/components/UpdateBookingModal';
 import UpdateProfileModal from '@/components/UpdateProfileModal';
 import LoadingSpinner from '@/components/LoadingSpinner';
+import ConfirmModal from '@/components/ConfirmModal';
 import { useAuth } from '@/context/AuthContext';
 import toast from 'react-hot-toast';
 
@@ -22,6 +22,9 @@ export default function DashboardPage() {
   const [selectedBooking, setSelectedBooking] = useState(null);
   const [isUpdateBookingOpen, setIsUpdateBookingOpen] = useState(false);
   const [isUpdateProfileOpen, setIsUpdateProfileOpen] = useState(false);
+
+  // Confirm delete modal state
+  const [confirmDeleteId, setConfirmDeleteId] = useState(null);
 
   // Auth Guard check: prevent flash or unnecessary redirect on refresh
   useEffect(() => {
@@ -68,13 +71,16 @@ export default function DashboardPage() {
     );
   };
 
-  const handleDeleteBooking = async (bookingId) => {
-    if (!window.confirm('Are you sure you want to cancel and delete this appointment?')) {
-      return;
-    }
+  // Opens the confirm modal — does NOT delete yet
+  const handleDeleteBooking = (bookingId) => {
+    setConfirmDeleteId(bookingId);
+  };
 
+  // Called only after user confirms inside the modal
+  const handleDeleteConfirmed = async () => {
+    if (!confirmDeleteId) return;
     try {
-      const res = await fetch(`${API_BASE}/api/appointments/${bookingId}`, {
+      const res = await fetch(`${API_BASE}/api/appointments/${confirmDeleteId}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token || localStorage.getItem('docappoint_token')}` }
       });
@@ -86,9 +92,11 @@ export default function DashboardPage() {
 
       toast.success('Appointment deleted successfully!');
       // Instantly remove from UI
-      setAppointments((prev) => prev.filter((app) => app._id !== bookingId));
+      setAppointments((prev) => prev.filter((app) => app._id !== confirmDeleteId));
     } catch (err) {
       toast.error(err.message || 'Deletion failed');
+    } finally {
+      setConfirmDeleteId(null);
     }
   };
 
@@ -107,13 +115,15 @@ export default function DashboardPage() {
         {/* Dashboard Header Profile Banner */}
         <div className="glass-card rounded-3xl p-6 sm:p-8 mb-8 border border-slate-200/80 dark:border-slate-800/80 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="flex items-center gap-4">
-            <div className="relative w-16 h-16 rounded-2xl overflow-hidden border-2 border-teal-500 shadow-md">
-              <Image
+            <div className="relative w-16 h-16 rounded-2xl overflow-hidden border-2 border-teal-500 shadow-md bg-teal-100">
+              <img
                 src={user.photoUrl || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=200'}
                 alt={user.name || 'User'}
-                fill
-                className="object-cover"
-                unoptimized
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(user.name || 'U')}&background=0d9488&color=fff`;
+                }}
               />
             </div>
             <div>
@@ -300,13 +310,15 @@ export default function DashboardPage() {
             </div>
 
             <div className="flex flex-col items-center text-center space-y-3 py-4">
-              <div className="relative w-28 h-28 rounded-full overflow-hidden border-4 border-teal-500 shadow-xl">
-                <Image
+              <div className="relative w-28 h-28 rounded-full overflow-hidden border-4 border-teal-500 shadow-xl bg-teal-100">
+                <img
                   src={user.photoUrl || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=200'}
                   alt={user.name || 'User'}
-                  fill
-                  className="object-cover"
-                  unoptimized
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(user.name || 'U')}&background=0d9488&color=fff`;
+                  }}
                 />
               </div>
               <div>
@@ -349,6 +361,17 @@ export default function DashboardPage() {
       <UpdateProfileModal
         isOpen={isUpdateProfileOpen}
         onClose={() => setIsUpdateProfileOpen(false)}
+      />
+
+      {/* Custom Confirm Delete Modal — replaces window.confirm */}
+      <ConfirmModal
+        isOpen={!!confirmDeleteId}
+        onClose={() => setConfirmDeleteId(null)}
+        onConfirm={handleDeleteConfirmed}
+        title="Cancel Appointment?"
+        message="This will permanently delete your appointment. This action cannot be undone."
+        confirmLabel="Yes, Delete"
+        danger={true}
       />
     </div>
   );

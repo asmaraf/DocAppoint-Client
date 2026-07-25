@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Auto-restore login on refresh
+  // Auto-restore login on refresh & sync Better Auth session
   useEffect(() => {
     const initAuth = async () => {
       const storedToken = localStorage.getItem('docappoint_token');
@@ -31,6 +31,33 @@ export const AuthProvider = ({ children }) => {
           }
         } catch (err) {
           console.warn('Auth restore warning using stored session:', err);
+        }
+      } else {
+        // Check if Better Auth session cookie exists (e.g. from Google OAuth callback)
+        try {
+          const res = await fetch(`${API_BASE}/api/auth/get-session`, {
+            credentials: 'include'
+          });
+          const data = await res.json();
+          if (data?.user || data?.session?.user) {
+            const baUser = data.user || data.session.user;
+            const formattedUser = {
+              _id: baUser.id || baUser._id,
+              name: baUser.name || 'Google User',
+              email: baUser.email,
+              photoUrl: baUser.image || baUser.photoUrl || '',
+              role: 'Patient'
+            };
+            setUser(formattedUser);
+            localStorage.setItem('docappoint_user', JSON.stringify(formattedUser));
+            if (data.token || data.session?.token) {
+              const t = data.token || data.session.token;
+              setToken(t);
+              localStorage.setItem('docappoint_token', t);
+            }
+          }
+        } catch (e) {
+          // ignore session check errors
         }
       }
       setLoading(false);

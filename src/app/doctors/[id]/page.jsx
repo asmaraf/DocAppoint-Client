@@ -1,9 +1,8 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import Image from 'next/image';
 import { useParams, useRouter } from 'next/navigation';
-import { Star, MapPin, Clock, Building2, Award, Calendar, MessageSquare, Send, CheckCircle2 } from 'lucide-react';
+import { Star, MapPin, Clock, Hospital, Award, Calendar, MessageSquare, Send } from 'lucide-react';
 import BookingModal from '@/components/BookingModal';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import { useAuth } from '@/context/AuthContext';
@@ -121,12 +120,14 @@ export default function DoctorDetailsPage() {
             
             {/* Left Photo */}
             <div className="lg:col-span-4 relative aspect-[4/3] rounded-2xl overflow-hidden bg-slate-100 dark:bg-slate-900 border-2 border-teal-500/30">
-              <Image
+              <img
                 src={doctor.image || 'https://images.unsplash.com/photo-1594824813566-88855ce78c9c?auto=format&fit=crop&q=80&w=600'}
                 alt={doctor.name}
-                fill
-                className="object-cover"
-                unoptimized
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(doctor.name)}&background=0d9488&color=fff&size=400`;
+                }}
               />
             </div>
 
@@ -152,7 +153,7 @@ export default function DoctorDetailsPage() {
                   <span><strong>Experience:</strong> {doctor.experience}</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Building2 className="w-5 h-5 text-teal-600 dark:text-teal-400 shrink-0" />
+                  <Hospital className="w-5 h-5 text-teal-600 dark:text-teal-400 shrink-0" />
                   <span><strong>Hospital:</strong> {doctor.hospital}</span>
                 </div>
                 <div className="flex items-center gap-2">

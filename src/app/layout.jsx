@@ -4,12 +4,16 @@ import { AuthProvider } from '@/context/AuthContext';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Toaster } from 'react-hot-toast';
+import ChunkErrorHandler from '@/components/ChunkErrorHandler';
 
 export const metadata = {
   title: 'DocAppoint - Doctor Appointment Booking System',
   description: 'Book verified specialist doctors, manage appointment schedules, check real-time availability, and access quality patient healthcare.',
   keywords: ['Doctor Appointment', 'DocAppoint', 'Book Doctor Online', 'Cardiologist', 'Neurologist', 'Medical Consultation'],
   authors: [{ name: 'DocAppoint Team' }],
+  icons: {
+    icon: '/favicon.svg',
+  },
   openGraph: {
     title: 'DocAppoint - Doctor Appointment Manager',
     description: 'Book certified medical specialists in seconds with zero hassle.',
@@ -25,6 +29,7 @@ export default function RootLayout({ children }) {
       <body>
         <ThemeProvider>
           <AuthProvider>
+            <ChunkErrorHandler />
             <Toaster
               position="top-right"
               toastOptions={{
