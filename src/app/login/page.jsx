@@ -27,13 +27,13 @@ function LoginForm() {
   const handleSocialAuth = async () => {
     setLoading(true);
     try {
-      const clientBase = window.location.origin; // http://localhost:3000
+      const clientBase = window.location.origin;
       const targetUrl = returnUrl && returnUrl.startsWith('/') ? `${clientBase}${returnUrl}` : `${clientBase}/`;
+      
       await authClient.signIn.social({
         provider: 'google',
         callbackURL: targetUrl,
       });
-      // Google will redirect the browser back to client
     } catch (err) {
       toast.error(err.message || 'Google login failed');
       setLoading(false);

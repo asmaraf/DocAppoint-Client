@@ -4,7 +4,8 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 
 const AuthContext = createContext();
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+// Use relative path so Next.js rewrites can proxy to backend
+const API_BASE = '';
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);

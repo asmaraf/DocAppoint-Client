@@ -69,13 +69,13 @@ function RegisterForm() {
 
   const handleSocialAuth = async (provider) => {
     try {
-      const clientBase = window.location.origin; // http://localhost:3000
+      const clientBase = window.location.origin;
       const targetUrl = returnUrl && returnUrl.startsWith('/') ? `${clientBase}${returnUrl}` : `${clientBase}/`;
+      
       await authClient.signIn.social({
-        provider: provider.toLowerCase(), // 'google'
+        provider: provider.toLowerCase(),
         callbackURL: targetUrl,
       });
-      // OAuth redirect — browser will be taken to provider
     } catch (err) {
       toast.error(err.message || `${provider} signup failed`);
     }

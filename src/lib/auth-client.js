@@ -1,14 +1,15 @@
 import { createAuthClient } from 'better-auth/client';
 
 export const authClient = createAuthClient({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000',
+  baseURL: typeof window !== 'undefined' ? window.location.origin : '',
 });
 
 // Social sign-in helper
-export const signInWithGoogle = async () => {
+export const signInWithGoogle = async (callbackURL) => {
   try {
     const data = await authClient.signIn.social({
       provider: 'google',
+      callbackURL: callbackURL || window.location.origin
     });
     return data;
   } catch (error) {
