@@ -163,11 +163,19 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const logout = () => {
+  const logout = async () => {
     setUser(null);
     setToken(null);
     localStorage.removeItem('docappoint_token');
     localStorage.removeItem('docappoint_user');
+    
+    // Also clear the better-auth session cookie so it doesn't auto-login on refresh
+    try {
+      const { authClient } = await import('@/lib/auth-client');
+      await authClient.signOut();
+    } catch (err) {
+      console.warn('Failed to clear better-auth session:', err);
+    }
   };
 
   return (
