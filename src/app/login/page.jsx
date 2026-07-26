@@ -92,14 +92,9 @@ function LoginForm() {
         </div>
 
         <div>
-          <div className="flex items-center justify-between mb-1">
-            <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
-              Password
-            </label>
-            <span className="text-xs text-teal-600 dark:text-teal-400 hover:underline cursor-pointer">
-              Forgot Password?
-            </span>
-          </div>
+          <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
+            Password
+          </label>
           <div className="relative">
             <input
               type="password"
@@ -110,6 +105,11 @@ function LoginForm() {
               className="w-full pl-10 pr-4 py-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white font-medium text-sm focus:ring-2 focus:ring-teal-500 outline-none"
             />
             <Lock className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" />
+          </div>
+          <div className="flex justify-end mt-1.5">
+            <span className="text-xs text-teal-600 dark:text-teal-400 hover:underline cursor-pointer">
+              Forgot Password?
+            </span>
           </div>
         </div>
 
