@@ -71,26 +71,27 @@ DocAppoint simplifies the appointment booking process by allowing users to searc
 
 ## 📦 Main Dependencies
 
-### Client
 
-- Next.js
-- React
-- Tailwind CSS
-- Lucide React
-- React Hot Toast
-- Axios
+### Frontend
+| Technology | Purpose |
+|------------|---------|
+| Next.js | React Framework |
+| React | UI Library |
+| Tailwind CSS | Styling |
+| Lucide React | Icons |
+| React Hot Toast | Notifications |
+| Axios | API Requests |
 
-### Server
-
-- Express.js
-- MongoDB
-- Mongoose
-- JWT
-- BcryptJS
-- Cors
-- Dotenv
-
----
+### Backend
+| Technology | Purpose |
+|------------|---------|
+| Express.js | Backend Framework |
+| MongoDB | Database |
+| Mongoose | MongoDB ODM |
+| JWT | Authentication |
+| BcryptJS | Password Hashing |
+| Cors | Cross-Origin Handling |
+| Dotenv | Environment Configuration |
 
 ## 🚀 Getting Started
 
