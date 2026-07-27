@@ -1,44 +1,199 @@
-# Doctor Appointment Manager (DocAppoint)
+# 🩺 Doctor Appointment Manager (DocAppoint)
 
-Welcome to **DocAppoint**, an advanced Doctor Appointment Booking System built with Next.js, React, Tailwind CSS, Node.js, Express, and MongoDB.
-
-- **Live Web Application URL**: [https://doc-appoint-client-nu.vercel.app](https://doc-appoint-client-nu.vercel.app)
-- **Server API URL**: [https://docappoint-server-mvur.onrender.com](https://docappoint-server-mvur.onrender.com)
+DocAppoint is a full-stack Doctor Appointment Booking System that enables patients to browse doctors, book appointments, and manage their bookings through a secure and user-friendly interface. Built with modern web technologies, it delivers a fast, responsive, and seamless healthcare experience.
 
 ---
 
-## Key Website Features
+## 🌐 Live Demo
 
-- 🩺 **Dynamic Doctor Directory & Top-Rated Specialists**: Browse certified doctors across Cardiology, Neurology, Pediatrics, Orthopedics, Dermatology, and Dentistry with real-time consultation fees, ratings, and experience details.
-- 🔍 **Real-Time Doctor Name Search & Sorting**: Instantly filter available doctors by doctor name, specialty, or hospital, and sort appointments by consultation fee (low-to-high / high-to-low) and rating.
-- 🔐 **Better Auth Compatible JWT Authentication**: Secure user login, registration with strict password validation (min 6 characters, at least 1 uppercase & 1 lowercase letter), and seamless Google/GitHub social login.
-- 📅 **Private Patient Dashboard & Controlled Booking Management**: Manage personal bookings with controlled pre-filled update modals (maintaining read-only doctor info and user email for data integrity) and instant item deletion.
-- 🌓 **Dark / Light Theme Toggle & Responsive Design**: Seamless mode switcher with persisted local storage settings, glassmorphism UI elements, custom medical loading animations, custom 404 page, and full mobile/tablet/desktop responsiveness.
+- **Client:** https://doc-appoint-client-nu.vercel.app
+- **Server API:** https://docappoint-server-mvur.onrender.com
 
 ---
 
-## Tech Stack & Architecture
+## 📸 Screenshot
 
-- **Client**: Next.js 14 (App Router), React 18, Tailwind CSS, Lucide Icons, React Hot Toast
-- **Server**: Express.js, MongoDB Atlas (Mongoose), JWT, BcryptJS, CORS, Dotenv
-- **Deployment**: Vercel (Client) & Render (Server)
+![DocAppoint Screenshot](assets/Screenshot.png)
 
 ---
 
-## Getting Started Locally
+## 🎯 Project Overview
+
+DocAppoint simplifies the appointment booking process by allowing users to search doctors, filter specialists, securely authenticate, and manage appointments through a personalized dashboard. The application follows a modern client-server architecture with JWT-based authentication and MongoDB as the database.
+
+---
+
+## ✨ Key Features
+
+- 🩺 Browse doctors by specialty, ratings, experience, and consultation fees.
+- 🔍 Search doctors by name, specialty, or hospital.
+- 📊 Sort doctors by consultation fee and rating.
+- 🔐 Secure JWT Authentication with Email/Password.
+- 🔑 Google & GitHub Social Login.
+- 📅 Private dashboard for managing appointments.
+- ✏️ Update appointments using controlled forms.
+- ❌ Cancel appointments instantly.
+- 🌙 Dark & Light Mode.
+- 📱 Fully responsive design for desktop, tablet, and mobile.
+- ⚡ Fast loading experience with custom animations.
+
+---
+
+## 🛠️ Tech Stack
+
+<p align="center">
+<img src="https://skillicons.dev/icons?i=nextjs,react,nodejs,express,mongodb,tailwind" />
+</p>
+
+### Frontend
+
+- Next.js 14 (App Router)
+- React 18
+- Tailwind CSS
+- Lucide React
+- React Hot Toast
+
+### Backend
+
+- Node.js
+- Express.js
+- MongoDB Atlas
+- Mongoose
+- JWT Authentication
+- BcryptJS
+
+### Deployment
+
+- Vercel (Client)
+- Render (Server)
+
+---
+
+## 📦 Main Dependencies
+
+### Client
+
+- Next.js
+- React
+- Tailwind CSS
+- Lucide React
+- React Hot Toast
+- Axios
+
+### Server
+
+- Express.js
+- MongoDB
+- Mongoose
+- JWT
+- BcryptJS
+- Cors
+- Dotenv
+
+---
+
+## 🚀 Getting Started
+
+### Clone Repository
 
 ```bash
-# Clone repository
-git clone https://github.com/araf/DocAppoint.git
+git clone https://github.com/asmaraf/DocAppoint.git
+```
 
-# Navigate to client
+### Install Client Dependencies
+
+```bash
 cd client
-
-# Install dependencies
 npm install
+```
 
-# Start Next.js development server
+### Install Server Dependencies
+
+```bash
+cd ../server
+npm install
+```
+
+---
+
+## ⚙️ Environment Variables
+
+### Client (.env.local)
+
+```env
+NEXT_PUBLIC_API_URL=http://localhost:5000
+```
+
+### Server (.env)
+
+```env
+PORT=5000
+
+MONGODB_URI=your_mongodb_connection_string
+
+JWT_SECRET=your_jwt_secret
+
+CLIENT_URL=http://localhost:3000
+```
+
+---
+
+## ▶️ Run Locally
+
+### Start Backend
+
+```bash
+cd server
 npm run dev
 ```
 
+### Start Frontend
 
+```bash
+cd client
+npm run dev
+```
+
+Visit
+
+```
+http://localhost:3000
+```
+
+---
+
+## 📂 Project Structure
+
+```
+DocAppoint
+│
+├── client
+│
+├── server
+│
+├── assets
+│
+└── README.md
+```
+
+---
+
+## 🌍 Links
+
+- 🌐 Live Website: https://doc-appoint-client-nu.vercel.app
+- ⚙️ Server API: https://docappoint-server-mvur.onrender.com
+- 💻 GitHub Repository: https://github.com/asmaraf/DocAppoint
+
+---
+
+## 👨‍💻 Author
+
+**ASM Araf**
+
+GitHub: https://github.com/asmaraf
+
+---
+
+## ⭐ Support
+
+If you found this project helpful, consider giving it a ⭐ on GitHub.
