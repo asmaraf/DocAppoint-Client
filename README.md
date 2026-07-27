@@ -41,4 +41,4 @@ npm install
 npm run dev
 ```
 
-Visit `http://localhost:3000` to view the application live.
+
